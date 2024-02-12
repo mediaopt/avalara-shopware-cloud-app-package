@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/Framework/App/Manifest/Schema/manifest-2.0.xsd">
+    <meta>
+        <name>MoptAvalaraCloud</name>
+        <label>Avalara</label>
+        <label lang="de-DE">Avalara</label>
+        <description>The Avalara App enables an easy handling of exporting products to countries like Canada and the USA and connecting your shop with your Avalara Account.</description>
+        <description lang="de-DE">Die Avalara-App ermöglicht eine einfache Abwicklung des Exports von Produkten in Länder wie Kanada und die USA sowie die Verknüpfung Ihres Shops mit Ihrem Avalara-Konto.</description>
+        <author>Mediaopt</author>
+        <copyright>(c) by Mediaopt GmbH.</copyright>
+        <version>1.0.0</version>
+        <license>MIT</license>
+        <compatibility>~6.5.5</compatibility>
+        <icon>logo.png</icon>
+        <privacy>https://www.mediaopt.de/privacy</privacy>
+        <privacyPolicyExtensions>
+            This app processes following personal information on servers based in the U.S.:
+            - Address information
+            - Order positions
+            - Order value
+        </privacyPolicyExtensions>
+        <privacyPolicyExtensions lang="de-DE">
+            Diese App verarbeitet folgende personenbezogene Daten auf Servern in den USA:
+            - Adress-Informationen
+            - Bestellpositionen
+            - Bestellsumme
+        </privacyPolicyExtensions>
+    </meta>
+    <setup>
+        <registrationUrl>https://app-production-b26am5s2cq-ew.a.run.app/register</registrationUrl>
+    </setup>
+     <permissions>
+        <create>notification</create>
+        <read>customer_address</read>
+        <read>order</read>
+        <read>product</read>
+        <read>category</read>
+        <read>shipping_method</read>
+        <read>sales_channel</read>
+        <read>promotion</read>
+        <create>snippet</create>
+        <read>snippet_set</read>
+        <update>order_line_item</update>
+        <update>webhook</update>
+        <read>webhook</read>
+        <update>tax_provider</update>
+        <read>tax_provider</read>
+    </permissions>
+        <allowed-hosts>
+        <host>https://sandbox-rest.avatax.com/api</host>
+        <host>https://rest.avalara.com/api</host>
+    </allowed-hosts>
+    <webhooks>
+        <webhook name="avalara-order-created" url="https://app-production-b26am5s2cq-ew.a.run.app/commit-order" event="checkout.order.placed"/>
+        <webhook name="avalara-order-cancelled" url="https://app-production-b26am5s2cq-ew.a.run.app/void-order" event="state_enter.order.state.cancelled"/>
+        <webhook name="avalara-app-activated" url="https://app-production-b26am5s2cq-ew.a.run.app/activate" event="app.activated"/>
+        <webhook name="avalara-app-deactivated" url="https://app-production-b26am5s2cq-ew.a.run.app/deactivate" event="app.deactivated"/>
+    </webhooks>
+    <admin>
+        <main-module source="https://app-production-b26am5s2cq-ew.a.run.app/admin"/>
+    </admin>
+    <custom-fields>
+        <custom-field-set>
+            <name>avatax_fields</name>
+            <label>AvaTax</label>
+            <label lang="de-DE">AvaTax</label>
+            <related-entities>
+                <shipping_method/>
+                <customer/>
+                <product/>
+                <category/>
+                <promotion/>
+            </related-entities>
+            <fields>
+                <text name="avatax_code">
+                    <label>Entity Use/Tax code</label>
+                    <position>1</position>
+                    <required>false</required>
+                    <help-text>Enter an appropriate AvaTax code for this entity</help-text>
+                </text>
+            </fields>
+        </custom-field-set>
+    </custom-fields>
+    <tax>
+        <tax-provider>
+            <identifier>avatax</identifier>
+            <name>AvaTax</name>
+            <priority>1</priority>
+            <process-url>https://app-production-b26am5s2cq-ew.a.run.app/get-tax</process-url>     
+        </tax-provider>
+    </tax>
+</manifest>

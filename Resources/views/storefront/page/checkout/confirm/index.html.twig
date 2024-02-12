@@ -1,0 +1,29 @@
+{% sw_extends '@Storefront/storefront/page/checkout/confirm/index.html.twig' %}
+
+{% block page_checkout_main_content %}
+    {{ parent() }}
+
+    {% set avataxValidationError %}
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                    type:"danger",
+                    content: "avatax.AddressValidationError"|trans|sw_sanitize
+                } %}
+    {% endset %}
+
+    {% set avataxConnectionError %}
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+                    type:"danger",
+                    content: "avatax.ConnectionError"|trans|sw_sanitize
+                } %}
+    {% endset %}
+
+    <template avatax-address-validator id="avatax">
+        <div id="avatax_country">{{context.customer.activeShippingAddress.country.iso3}}</div>
+        <div id="avatax_city">{{context.customer.activeShippingAddress.city}}</div>
+        <div id="avatax_zipcode">{{context.customer.activeShippingAddress.zipcode}}</div>
+        <div id="avatax_street">{{context.customer.activeShippingAddress.street}}</div>
+    </template>
+    
+    <template id="avatax_alert">{{avataxValidationError}}</template>
+    <template id="avatax_connection">{{avataxConnectionError}}</template>
+{% endblock %}

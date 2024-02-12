@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/CustomEntity/Xml/entity-1.0.xsd">
+    <entity name="ce_avatax_merchant_data">
+        <fields>
+            <!-- we support different scalar values: int, float, string, text, bool, date -->
+            <string name="avatax_username" required="true" translatable="true"  store-api-aware="false"/>
+            <string name="avatax_password" required="true" translatable="true"  store-api-aware="false"/>
+            <string name="avatax_companyCode" required="true" translatable="true"  store-api-aware="false"/>
+            <bool name="avatax_env" translatable="true"  store-api-aware="false"/>
+            <bool name="avatax_DocRec" translatable="true"  store-api-aware="false"/>
+            <bool name="avatax_addressValidation" translatable="true"  store-api-aware="false"/>
+            <bool name="avatax_blockCart" translatable="true"  store-api-aware="false"/>
+            <string name="avatax_line1" required="true" translatable="true"  store-api-aware="false"/>
+            <string name="avatax_line2" required="false" translatable="true"  store-api-aware="false"/>
+            <string name="avatax_line3" required="false" translatable="true"  store-api-aware="false"/>
+            <string name="avatax_city" required="true" translatable="true"  store-api-aware="false"/>
+            <string name="avatax_region" required="true" translatable="true" store-api-aware="false"/>
+            <string name="avatax_postalCode" required="true" translatable="true" store-api-aware="false"/>
+            <string name="avatax_country" required="true" translatable="true" store-api-aware="false"/>
+            <string name="avatax_cronjob" required="false" store-api-aware="false" />
+            <string name="avatax_loglevel" required="false" store-api-aware="false" />
+
+            <!-- additionally, to the scalar values, we have support for json fields  -->
+        </fields>
+    </entity>
+    <entity name="ce_avatax_logs">
+        <fields>
+            <!-- we support different scalar values: int, float, string, text, bool, date -->
+            <string name="sales_channel" required="true" translatable="false" store-api-aware="false"/>
+            <string name="log_type" required="true" translatable="false" store-api-aware="false"/>
+            <json name="payload" required="true" store-api-aware="false"/>
+            
+        </fields>
+    </entity>
+</entities>
